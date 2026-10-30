@@ -12,7 +12,7 @@
       {% endif %}
       <div class="category-cover">
         {% if coverPost.data.photo %}
-        <img eleventy:ignore src="{{ coverPost | getPhotoInfos('url') }}" alt="">
+        <img eleventy:ignore src="{{ coverPost | getPhotoInfos('url')[0] }}" alt="">
         {% endif %}
       </div>
       <h2>{{ category }}</h2>

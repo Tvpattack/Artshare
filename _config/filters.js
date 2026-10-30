@@ -77,7 +77,7 @@ export default function (eleventyConfig) {
   }
   eleventyConfig.addFilter("getExifData", getExifData)
 
-  function getPhotoInfos(post, request) {
+  function getPhotoInfo(post, request) {
     const inputDir = path.dirname(post.inputPath)
     const imagePath = path.resolve(inputDir, post.data.photo)
     const outputDir = path.dirname(post.outputPath)
@@ -95,6 +95,10 @@ export default function (eleventyConfig) {
     const stats = Image.statsSync(imagePath, options)
     return stats.jpeg[0][request] // Returns requested information
   }
+  function getPhotoInfos(post, request) {
+    return post.photo.map(photo => getPhotoInfo({...post, photo}, request));  
+  }
+
   eleventyConfig.addFilter("getPhotoInfos", getPhotoInfos)
 
   eleventyConfig.addFilter("findByFileSlug", (collection = [], slug = "") => {
